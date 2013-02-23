@@ -1,4 +1,4 @@
 gdg-hackathon-ck-askme
 ======================
 
-GDG Hackathon Cjerkasy Feb 2013
+GDG Hackathon Cherkasy Feb 2013
