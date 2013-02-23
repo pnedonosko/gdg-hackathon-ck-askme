@@ -2,23 +2,18 @@ import ua.org.gdg.cherkasy.hackathon.askme.*
 import ua.org.gdg.cherkasy.hackathon.askme.translation.GoogleTranslator
 import ua.org.gdg.cherkasy.hackathon.askme.translation.TextEntry
 
+import com.google.appengine.labs.repackaged.org.json.JSONArray
+
 def translator = new GoogleTranslator()
-//def period = params.p
-//def json
-//def where
-//if (period) {
-	//where = "created > $period"
-//}
-//def result = translator.translate(Languages.UK, new TextEntry(Languages.EN, params.text))
 
 def targetLang = params.lang
-def questions = []
+def questions = [:]
 for (q in Question.findAll()) {
-	log.info "Question ${q.text}"
-	q.text = translator.translate(targetLang, new TextEntry(q.lang, params.text))
-	questions << q
-} 
+	q.text = translator.translate(targetLang, new TextEntry(q.lang, q.text)).text
+	log.info "Question ${q.text} $targetLang ${q.lang}"
+	questions.put(q.qid, q)
+	//new Question(qid : q.qid, text :  q.text, lang :  q.lang, created : null, status : 0))
+}
 
-//json = jsonLibBuilderFactory.jsonLibBuilder.json { id = user.deviceId }
 response.renderJson questions
 
