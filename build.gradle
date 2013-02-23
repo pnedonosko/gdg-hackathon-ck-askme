@@ -12,7 +12,7 @@ targetCompatibility = compatibilityVersion
 buildscript {
     repositories {
         mavenCentral()
-	mavenLocal()
+		mavenLocal()
     }
 
     dependencies {
